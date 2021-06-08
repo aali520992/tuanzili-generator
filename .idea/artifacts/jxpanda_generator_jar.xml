@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="jxpanda-generator:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/jxpanda_generator_jar</output-path>
+    <root id="archive" name="jxpanda-generator.jar">
+      <element id="module-output" name="jxpanda-generator.main" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,175 @@
+# 配置文件example（该文件中给出的值，均为默认值）
+global:
+  # 是否覆盖已有文件
+  fileOverride: false
+  # 是否打开输出目录
+  open: false
+  # 是否在xml中添加二级缓存配置
+  enableCache: false
+  # 是否生成为 Kotlin 代码
+  kotlin: false
+  # 开启 swagger2 模式
+  swagger2: false
+  # 开启 ActiveRecord 模式
+  activeRecord: false
+  # 是否在生成的XML文件中创建 BaseResultMap
+  baseResultMap: false
+  # 生成的时间类型对应的java类。
+  # ONLY_DATE --> 只使用 java.util.date 
+  # SQL_PACK --> 使用 java.sql 包下的时间对象
+  # TIME_PACK --> 使用 java.time 包下的 java8 新的时间类型
+  dateType: TIME_PACK
+  # 是否在生成的XML文件中创建 baseColumnList
+  baseColumnList: false
+  # 各层文件名称方式，例如： %sAction 生成 UserAction
+  entityName: ""
+  mapperName: ""
+  xmlName: ""
+  serviceName: ""
+  serviceImplName: ""
+  controllerName: ""
+  # 指定生成的主键的ID类型。
+  # AUTO --> 数据库ID自增
+  # NONE --> 该类型为未设置主键类型
+  # INPUT --> 用户输入ID，该类型可以通过自己注册自动填充插件进行填充
+  # 以下3种类型、只有当插入对象ID 为空，才自动填充
+  # ID_WORKER --> 全局唯一ID (idWorker)
+  # UUID --> 全局唯一ID (UUID)
+  # ID_WORKER_STR --> 字符串全局唯一ID (idWorker 的字符串表示)
+  idType: ID_WORKER
+
+# 数据源配置
+dataSource:
+  # PostgreSQL schemaName
+  schemaName: ""  
+  # 驱动连接的地址  
+  host: ""  
+  # 驱动连接的端口，默认3306   
+  port: 3306  
+  # 驱动名称，默认是mysql的驱动（请确保依赖）  
+  driverName: com.mysql.cj.jdbc.Driver
+  # 数据库名称   
+  database: ""  
+  # 数据库连接用户名  
+  username: ""  
+  # 数据库连接密码  
+  password: ""  
+  # 编码，默认：UTF-8   
+  encoding: "UTF8"  
+  # ssl参数，默认：false   
+  ssl: false  
+  # 服务器时区，默认：AsiaShanghai   
+  serverTimezone: "AsiaShanghai"
+  dbType: MYSQL
+  # url，这个值如果设定了的话，上面的database、host、port、encoding、ssl、serverTimezone都会失效，以这个为准
+  # 其实上面那些散列开的配置最终就是组成了这个属性而已
+  url: ""
+
+# 策略配置
+strategy:
+  # 是否大写命名  
+  capitalMode: false  
+  # 是否跳过视图  
+  skipView: false  
+  # 数据库【表】映射到实体的命名策略
+  # nochange 不做任何改变
+  # underline_to_camel 下划线转驼峰
+  naming: underline_to_camel
+  # 数据库【表字段】映射到实体的命名策略
+  # 未指定按照 naming 执行
+  columnNaming: underline_to_camel
+  # 表前缀，是一个列表，默认是【没有】的这里只是放出来告诉大家有这个配置，而且要按照列表的形式配置
+  tablePrefix:
+    - ""
+    - ""
+  # 字段前缀，参考tablePrefix的注释
+  fieldPrefix:
+    - ""
+  # 自定义继承的Entity类全称，带包名，必须带包名
+  superEntityClass: ""
+  # 自定义基础的Entity类，公共字段，
+  # 如果设定了superEntityClass，一般都需要设定这个，不然superEntityClass里面的公共字段还是会被写到子类里
+  # 值得注意的是，这里要写数据库中的字段名称，不是类里的
+  superEntityColumns:
+    - "id"
+    - "created_date"
+  # 自定义继承的Mapper类全称，带包名
+  superMapperClass: SUPER_MAPPER_CLASS
+  # 自定义继承的Service类全称，带包名
+  superServiceClass: SUPER_SERVICE_CLASS
+  # 自定义继承的ServiceImpl类全称，带包名
+  superServiceImplClass: SUPER_SERVICE_IMPL_CLASS
+  # 自定义继承的Controller类全称，带包名
+  superControllerClass: ""
+  # 需要包含的表名，允许正则表达式（与exclude二选一配置，如果两个都不配置的话，会把库里面的所有表都生成出来）
+  include:
+    - ""
+  # 需要排除的表名，允许正则表达式
+  exclude:
+    - ""
+  # 【实体】是否生成字段常量（默认 true）public static final String ID = "test_id";
+  entityColumnConstant: true
+  # 【实体】是否为构建者模型（默认 false）
+  # public User setName(String name) { this.name = name; return this; }
+  entityBuilderModel: false
+  # 【实体】是否为lombok模型（默认 false） https:projectlombok.org
+  entityLombokModel: false
+  # Boolean类型字段是否移除is前缀（默认 false）
+  # 比如: 数据库字段名称: 'is_xxx'类型为: tinyint. 在映射实体的时候则会去掉is在实体类中映射最终结果为 xxx
+  entityBooleanColumnRemoveIsPrefix: false
+  # 生成 `@RestController` 控制器   `@Controller` -> `@RestController`
+  restControllerStyle: false
+  #  控制器mapping驼峰转连字符
+  # `@RequestMapping("managerUserActionHistory")` -> `@RequestMapping("manager-user-action-history")`
+  controllerMappingHyphenStyle: false
+  # 是否生成实体时，生成字段注解
+  entityTableFieldAnnotationEnable: false
+  # 乐观锁属性名称
+  versionFieldName: ""
+  # 逻辑删除属性名称
+  logicDeleteFieldName: ""
+
+# 包配置
+package:
+  # 父包名。如果为空，将下面子包名必须写全部， 否则就只需写子包名
+  parent: "com.baomidou"  
+  # 父包模块名。
+  moduleName: ""  
+  # Entity包名
+  entity: "entity"  
+  # Service包名
+  service: "service"  
+  # Service Impl包名
+  serviceImpl: "service.impl"  
+  # Mapper包名
+  mapper: "mapper"  
+  # Mapper XML包名
+  xml: "mapper.xml"  
+  # Controller包名
+  controller: "controller"  
+  # 路径配置信息
+  # 类型是一个map
+  # 默认是空的，mybatis-plus的生成器会根据包名自动把路径解析出来
+  # 这里值得注意的是，mybatis-plus的生成器会检测这个配置是否为空 null != configPathInfo
+  # 如果不为空，直接使用该配置
+  # 也就是说，如果要使用该配置，必须把所有文件的路径都写进来，否则某些文件就没有了
+  # 我把这个map里的key值都抄过来了
+  pathInfo:
+    entity_path: ""
+    service_path: ""
+    service_impl_path: ""
+    mapper_path: ""
+    xml_path: ""
+    controller_path: ""
+
+# 模板配置
+template:
+  # 下面这些配置都是模板文件的路径配置，可以使用自定义的模板文件
+  # 一般使用默认值就行了，写出来只是记录一下有这个属性可以配置
+  entity: ""
+  entityKt: ""
+  service: ""
+  serviceImpl: ""
+  mapper: ""
+  xml: ""
+  controller: ""
